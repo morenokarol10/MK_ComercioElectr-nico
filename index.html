@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MK – Tu estilo, tu esencia</title>
+  <!-- CSS-link -->
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Jost:wght@100;200;300;400;500; 600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.
+1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBOVD591QIYicR65iaqukzvf/
+nwasF0nqhPay5w/91JmVM2hMDcnK10nMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous"
+referrerpolicy="no-referrer" />
+
+<link rel="stylesheet"
+href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+  
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo"><img src="imagenes/logo.webp" alt=""></a>
+    <ul class="navmenu">
+      <li><a href="index.html" class="active">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+
+    <div class="nav-icon">
+      <a href="#" id="search-icon-trigger"><i class='bx bx-search'></i></a>
+      <a href="login.html"><i class='bx bx-user'></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart'></i></a>
+      <a href="carrito.html"><i class='bx bx-cart'></i></a>
+    </div>
+  </header>
+
+  <!-- SEARCH MODAL -->
+  <div id="search-modal" class="search-modal" style="display: none;">
+    <div class="search-modal-overlay"></div>
+    <div class="search-modal-content">
+      <button id="search-modal-close" class="search-modal-close">&times;</button>
+      <div class="search-modal-input-wrapper">
+        <input 
+          type="text" 
+          id="search-modal-input" 
+          class="search-modal-input" 
+          placeholder="Buscar productos..."
+          autocomplete="off"
+        >
+        <i class='bx bx-search'></i>
+      </div>
+    </div>
+  </div>
+
+  <section class="main-home">
+    <div class="main-text">
+      <h5>Nueva Temporada</h5>
+      <h1>Nueva Colección <br> 2026</h1>
+      <p>No hay nada como el estilo y la comodidad.</p>
+
+      <a href="nueva-coleccion.html" class="main-btn">Comprar ahora <i class='bx bx-right-arrow-alt'></i></a>
+    </div>
+
+    <div class="down-arrow">
+      <a href="#trending" class="down"><i class='bx bx-down-arrow-alt'></i></a>
+    </div>
+
+  </section>
+
+  <!--trending-products-section-->
+  <section class="trending-products" id="trending">
+    <div class="center-text" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; text-align: center;">
+        <h2>Nuestros productos <span>de oferta</span></h2>
+      </div>
+      <a id="viewAllProducts" class="main-btn" href="ofertas.html" style="display: inline-block; padding: 8px 16px; font-size: 13px; width: auto;">Ver ofertas <i class='bx bx-right-arrow-alt'></i></a>
+    </div>
+
+    <div class="products" id="indexOffersContainer">
+      <!-- Los productos se cargarán dinámicamente aquí -->
+    </div>
+
+  </section>
+
+  <!--Client-Review-section-->
+
+  <section class="client-reviews">
+    <div class="reviews">
+      <div class="reviews-header" style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+        <div style="flex: 1; text-align: center;">
+          <h3>Opiniones de clientes</h3>
+        </div>
+        <button id="viewAllReviews" class="main-btn" aria-expanded="false" aria-controls="moreReviews" style="padding: 8px 16px; font-size: 13px; display: inline-block; width: auto;">Ver todas <i class='bx bx-chevron-down'></i></button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;">
+        <div class="review-card">
+          <i class='bx bxs-user-circle' style="font-size: 60px; color: #34656D;"></i>
+          <div>
+            <p>Excelente calidad.</p>
+            <h4>Mark Pérez</h4>
+            <small>CEO de Addle</small>
+          </div>
+        </div>
+
+        <div id="moreReviews" class="more-reviews" style="display: contents;" hidden>
+          <div class="review-card">
+            <i class='bx bxs-user-circle' style="font-size: 60px; color: #34656D;"></i>
+            <div>
+              <p>Excelente calidad y envío rápido. Muy satisfecha con la compra.</p>
+              <h4>Ana Gómez</h4>
+              <small>Compradora</small>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <i class='bx bxs-user-circle' style="font-size: 60px; color: #34656D;"></i>
+            <div>
+              <p>Los talles son precisos y la atención al cliente resolvió mi duda en minutos.</p>
+              <h4>Juan López</h4>
+              <small>Cliente frecuente</small>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <i class='bx bxs-user-circle' style="font-size: 60px; color: #34656D;"></i>
+            <div>
+              <p>Buena relación calidad-precio. Recomendado para compras casuales.</p>
+              <h4>María Ruiz</h4>
+              <small>Influencer</small>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <i class='bx bxs-user-circle' style="font-size: 60px; color: #34656D;"></i>
+            <div>
+              <p>Packaging cuidado y entrega en tiempo. Volveré a comprar.</p>
+              <h4>Carlos Medina</h4>
+              <small>Cliente</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+
+  <div class="end-text">
+    <p>Copyright @2025. All Rights Reserved. Designd By Saidul Islam.</p>
+  </div>
+
+  <script src="java.js"></script>
+  <script src="app.js"></script>
+  <script src="modal.js"></script>
+  <script src="nav.js"></script>
+
+  <script>
+    // Toggle 'Ver todas' reseñas
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const btn = document.getElementById('viewAllReviews');
+      const more = document.getElementById('moreReviews');
+      if (!btn || !more) return;
+      btn.addEventListener('click', ()=>{
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (expanded) {
+          more.hidden = true;
+          btn.querySelector('i').className = 'bx bx-chevron-down';
+          btn.firstChild && (btn.firstChild.textContent = 'Ver todas ');
+        } else {
+          more.hidden = false;
+          btn.querySelector('i').className = 'bx bx-chevron-up';
+          btn.firstChild && (btn.firstChild.textContent = 'Ver todas ');
+        }
+      });
+      // (El enlace de productos destacados apunta a featured.html)
+    });
+  </script>
+
+  <!-- Search Modal Logic -->
+  <script>
+    const searchIconTrigger = document.getElementById('search-icon-trigger');
+    const searchModal = document.getElementById('search-modal');
+    const searchModalClose = document.getElementById('search-modal-close');
+    const searchModalInput = document.getElementById('search-modal-input');
+    const searchModalOverlay = document.querySelector('.search-modal-overlay');
+
+    searchIconTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      searchModal.style.display = 'flex';
+      searchModalInput.focus();
+    });
+
+    searchModalClose.addEventListener('click', () => {
+      searchModal.style.display = 'none';
+    });
+
+    searchModalOverlay.addEventListener('click', () => {
+      searchModal.style.display = 'none';
+    });
+
+    searchModalInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const searchTerm = searchModalInput.value.trim();
+        if (searchTerm) {
+          window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+        }
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchModal.style.display === 'flex') {
+        searchModal.style.display = 'none';
+      }
+    });
+  </script>
+
+  <!-- MODAL PARA SELECCIONAR OPCIONES DEL PRODUCTO -->
+  <div id="optionsModal" class="modal-options" style="display: none;">
+    <div class="modal-overlay" onclick="closeProductModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProductModal()">×</button>
+      <h2>Selecciona opciones del producto</h2>
+      
+      <div id="modalProductInfo" class="modal-product-info">
+        <!-- Información del producto se cargará aquí -->
+      </div>
+
+      <!-- Talla -->
+      <div id="sizeSection" class="modal-section" style="display: none;">
+        <label>Talla</label>
+        <div id="sizeOptions" class="options-grid">
+          <!-- Opciones de talla se cargarán aquí -->
+        </div>
+      </div>
+
+      <!-- Color -->
+      <div id="colorSection" class="modal-section" style="display: none;">
+        <label>Color</label>
+        <div id="colorOptions" class="options-grid">
+          <!-- Opciones de color se cargarán aquí -->
+        </div>
+      </div>
+
+      <button id="confirmBtn" class="btn-confirm" onclick="confirmProductAdd()">
+        Agregar al carrito
+      </button>
+    </div>
+  </div>
+
+  <style>
+    .modal-options {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-options .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .modal-options .modal-content {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    .modal-options .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .modal-options .modal-close:hover {
+      color: #333;
+    }
+
+    .modal-options .modal-content h2 {
+      margin-top: 0;
+      color: #222;
+      font-size: 20px;
+    }
+
+    .modal-product-info {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-product-info img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .modal-product-info-text h3 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      color: #222;
+    }
+
+    .modal-product-info-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .modal-section {
+      margin-bottom: 20px;
+    }
+
+    .modal-section label {
+      display: block;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      gap: 8px;
+    }
+
+    .option-btn {
+      padding: 10px;
+      border: 2px solid #ddd;
+      background: white;
+      color: #222;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: #34656D;
+      color: #34656D;
+    }
+
+    .option-btn.selected {
+      background: #34656D;
+      color: white;
+      border-color: #34656D;
+    }
+
+    .btn-confirm {
+      width: 100%;
+      padding: 12px;
+      background: #34656D;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    .btn-confirm:hover {
+      background: #2a4f57;
+    }
+
+    .btn-confirm:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+
+  <script>
+    // Variable para almacenar el producto actual
+    let currentIndexProduct = null;
+    let selectedIndexSize = null;
+    let selectedIndexColor = null;
+
+    // Obtener el producto de los botones de inicio
+    function openProductModal(productName, productPrice, sizes, colors) {
+      currentIndexProduct = { name: productName, price: productPrice };
+      selectedIndexSize = null;
+      selectedIndexColor = null;
+
+      const productInfo = document.getElementById('modalProductInfo');
+      productInfo.innerHTML = `
+        <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+          <i class='bx bx-image' style="font-size: 40px; color: #ccc;"></i>
+        </div>
+        <div class="modal-product-info-text">
+          <h3>${productName}</h3>
+          <p>$${typeof productPrice === 'number' ? productPrice.toFixed(2) : productPrice}</p>
+        </div>
+      `;
+
+      // Mostrar opciones de talla
+      const sizeSection = document.getElementById('sizeSection');
+      const sizeOptions = document.getElementById('sizeOptions');
+      if (sizes && sizes.length > 0) {
+        sizeSection.style.display = 'block';
+        sizeOptions.innerHTML = sizes.map(size => `
+          <button class="option-btn" onclick="selectIndexSize('${size}')">${size}</button>
+        `).join('');
+      } else {
+        sizeSection.style.display = 'none';
+      }
+
+      // Mostrar opciones de color
+      const colorSection = document.getElementById('colorSection');
+      const colorOptions = document.getElementById('colorOptions');
+      if (colors && colors.length > 0) {
+        colorSection.style.display = 'block';
+        colorOptions.innerHTML = colors.map(color => `
+          <button class="option-btn" onclick="selectIndexColor('${color}')">${color}</button>
+        `).join('');
+      } else {
+        colorSection.style.display = 'none';
+      }
+
+      const modal = document.getElementById('optionsModal');
+      modal.style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById('optionsModal');
+      modal.style.display = 'none';
+      currentIndexProduct = null;
+      selectedIndexSize = null;
+      selectedIndexColor = null;
+    }
+
+    function selectIndexSize(size) {
+      selectedIndexSize = size;
+      const buttons = document.querySelectorAll('#sizeOptions .option-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('selected');
+        if (btn.textContent.trim() === size) {
+          btn.classList.add('selected');
+        }
+      });
+    }
+
+    function selectIndexColor(color) {
+      selectedIndexColor = color;
+      const buttons = document.querySelectorAll('#colorOptions .option-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('selected');
+        if (btn.textContent.trim() === color) {
+          btn.classList.add('selected');
+        }
+      });
+    }
+
+    function confirmProductAdd() {
+      const sizeSection = document.getElementById('sizeSection');
+      const colorSection = document.getElementById('colorSection');
+
+      if (sizeSection.style.display !== 'none' && !selectedIndexSize) {
+        alert('Por favor selecciona una talla');
+        return;
+      }
+
+      if (colorSection.style.display !== 'none' && !selectedIndexColor) {
+        alert('Por favor selecciona un color');
+        return;
+      }
+
+      // Usar la función addToCart del app.js
+      addToCart({
+        name: currentIndexProduct.name,
+        price: currentIndexProduct.price,
+        size: selectedIndexSize,
+        color: selectedIndexColor
+      });
+
+      closeProductModal();
+    }
+  </script>
+
+  <script>
+    // Cargar productos con ofertas dinámicamente en el inicio
+    (async function() {
+      try {
+        const res = await fetch('products.json');
+        const allProducts = await res.json();
+        
+        // Filtrar productos con descuento y tomar los primeros 6
+        const discountedProducts = allProducts
+          .filter(p => p.discount && p.originalPrice)
+          .slice(0, 6);
+
+        const container = document.getElementById('indexOffersContainer');
+        
+        if (discountedProducts.length === 0) {
+          container.innerHTML = '<p style="text-align: center; padding: 40px;">No hay ofertas disponibles.</p>';
+          return;
+        }
+
+        // Generar HTML para cada producto
+        const productsHTML = discountedProducts.map(product => `
+          <div class="row">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-text">
+              <h5 style="color: white; font-weight: bold; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 4px; display: inline-block;">-${product.discount}%</h5>
+            </div>
+            <div class="heart-icon" onclick="toggleFavorite(event, '${product.name}')" style="cursor: pointer;">
+              <i class='bx bx-heart'></i>
+            </div>     
+            <div class="ratting">
+              <i class='bx bx-star'></i>
+              <i class='bx bx-star'></i>
+              <i class='bx bx-star'></i>
+              <i class='bx bx-star'></i>
+              <i class='bx bx-star-half'></i>
+            </div>
+
+            <div class="price">
+              <h4>${product.name}</h4>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <p style="text-decoration: line-through; color: #999; margin: 0; font-size: 14px;">$${product.originalPrice}</p>
+                <p style="color: #d32f2f; font-weight: bold; margin: 0;">$${product.price}</p>
+              </div>
+            </div>
+            <div class="product-actions">
+              <button class="btn-detail" onclick="goToProductDetail('${product.name}')">
+                <i class='bx bx-show'></i> Ver detalles
+              </button>
+              <button class="add-to-cart" data-product="${product.name}" data-price="${product.price}">
+                <i class='bx bx-cart'></i> Agregar
+              </button>
+            </div>
+          </div>
+        `).join('');
+
+        container.innerHTML = productsHTML;
+
+        // Agregar listeners a los botones de agregar del contenedor de ofertas
+        document.querySelectorAll('#indexOffersContainer .add-to-cart').forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = this.dataset.product;
+            const productPrice = parseFloat(this.dataset.price);
+            
+            // Buscar el producto en el array
+            const product = allProducts.find(p => p.name === productName && p.price == productPrice);
+            
+            if (product) {
+              openProductModal(
+                product.name,
+                product.price,
+                product.sizes || [],
+                product.colors || []
+              );
+            }
+          });
+        });
+        
+        // Inicializar estado de corazones para productos cargados dinámicamente
+        inicializarCorazones();
+      } catch (error) {
+        console.error('Error cargando ofertas:', error);
+      }
+    })();
+
+    // Función para inicializar el estado de los corazones
+    function inicializarCorazones() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      
+      document.querySelectorAll('#indexOffersContainer .heart-icon').forEach(heartIcon => {
+        const icon = heartIcon.querySelector('i');
+        const productName = heartIcon.closest('.row').querySelector('.price h4').textContent;
+        
+        if (favorites.includes(productName)) {
+          icon.classList.remove('bx-heart');
+          icon.classList.add('bxs-heart');
+          heartIcon.style.color = '#ee1c47';
+        }
+      });
+    }
+
+    // Función para ir a los detalles del producto
+    function goToProductDetail(productName) {
+      window.location.href = `product-detail.html?name=${encodeURIComponent(productName)}`;
+    }
+
+    // Función para alternar favoritos
+    function toggleFavorite(event, productName) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const heartIcon = event.currentTarget;
+      const icon = heartIcon.querySelector('i');
+      
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const index = favorites.indexOf(productName);
+      
+      if (index > -1) {
+        // Quitar de favoritos
+        favorites.splice(index, 1);
+        icon.classList.remove('bxs-heart');
+        icon.classList.add('bx-heart');
+        heartIcon.style.color = '';
+        console.log('❌ Removido de favoritos:', productName);
+      } else {
+        // Agregar a favoritos
+        favorites.push(productName);
+        icon.classList.remove('bx-heart');
+        icon.classList.add('bxs-heart');
+        heartIcon.style.color = '#ee1c47';
+        console.log('✅ Agregado a favoritos:', productName);
+      }
+      
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      console.log('📦 localStorage.favorites actualizado:', favorites);
+    }
+  </script>
+
+  <script>
+    // Cargar productos y agregar listeners a los botones de agregar
+    (async function() {
+      try {
+        const res = await fetch('products.json');
+        const data = await res.json();
+        const allProducts = data.products ? data.products : data;
+
+        // Agregar listeners a todos los botones "add-to-cart"
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = this.dataset.product;
+            const productPrice = parseFloat(this.dataset.price);
+            
+            // Buscar el producto en el JSON
+            const product = allProducts.find(p => p.name === productName && p.price == productPrice);
+            
+            if (product) {
+              openProductModal(
+                product.name,
+                product.price,
+                product.sizes || [],
+                product.colors || []
+              );
+            } else {
+              alert('Producto no encontrado');
+            }
+          });
+        });
+      } catch (error) {
+        console.error('Error cargando productos:', error);
+      }
+    })();
+  </script>
+</body>
+</html>
+</body>
+</html>

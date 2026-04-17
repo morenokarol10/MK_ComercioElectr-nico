@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo de Productos — MK Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <style>
+    /* Layout de dos columnas para búsqueda */
+    .search-section {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      margin-top: 120px;
+      padding: 40px 10%;
+    }
+
+    .search-filters {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .filter-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .filter-checkbox input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .filter-checkbox label {
+      margin: 0;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .search-results {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .results-count {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .no-results i {
+      font-size: 64px;
+      display: block;
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    .btn-reset {
+      width: 100%;
+      padding: 10px;
+      background: #ee1c47;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 20px;
+    }
+
+    .btn-reset:hover {
+      background: #d91a3f;
+    }
+
+    /* Estilos para tarjetas de producto */
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .product-card h3 {
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #222;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .product-card .price {
+      padding: 0 12px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #34656D;
+      margin: 0;
+    }
+
+    .product-card .rating {
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .product-card .rating i {
+      font-size: 14px;
+      color: #ffc107;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      margin-top: auto;
+    }
+
+    .product-actions button {
+      flex: 1;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+    }
+
+    .btn-detail {
+      background: #34656D;
+      color: white;
+    }
+
+    .btn-detail:hover {
+      background: #2a4f57;
+      transform: translateY(-2px);
+    }
+
+    .btn-add {
+      background: #34656D;
+      color: white;
+    }
+
+    .btn-add:hover {
+      background: #2a4f57;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1024px) {
+      .search-section {
+        grid-template-columns: 1fr;
+        padding: 30px 6%;
+      }
+
+      .search-filters {
+        position: static;
+      }
+
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-section {
+        padding: 20px 4%;
+        gap: 20px;
+      }
+
+      .search-filters {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        background: white;
+        padding: 15px 0;
+      }
+
+      .filter-group {
+        margin-bottom: 0;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+      }
+
+      .btn-reset {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .search-section {
+        padding: 15px 4%;
+      }
+
+      .search-filters {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo"><img src="imagenes/logo.webp" alt="MK logo"></a>
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+    <div class="nav-icon">
+      <a href="featured.html"><i class='bx bx-search'></i></a>
+      <a href="login.html"><i class='bx bx-user'></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart'></i></a>
+      <a href="carrito.html"><i class='bx bx-cart'></i></a>
+    </div>
+  </header>
+
+  <!-- SECCIÓN DE CATÁLOGO -->
+  <section class="search-section">
+    <!-- FILTROS (LADO IZQUIERDO) -->
+    <aside class="search-filters">
+      <!-- FILTRO: Género -->
+      <div class="filter-group">
+        <label class="filter-title">Género</label>
+        <div class="filter-options">
+          <div class="filter-checkbox">
+            <input type="checkbox" id="genre-hombre" value="Hombre" class="genre-filter">
+            <label for="genre-hombre">Hombre</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="genre-mujer" value="Mujer" class="genre-filter">
+            <label for="genre-mujer">Mujer</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="genre-unisex" value="Unisex" class="genre-filter">
+            <label for="genre-unisex">Unisex</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO: Categoría -->
+      <div class="filter-group">
+        <label class="filter-title">Categoría</label>
+        <div class="filter-options">
+          <div class="filter-checkbox">
+            <input type="checkbox" id="category-ropa" value="Ropa" class="category-filter">
+            <label for="category-ropa">Ropa</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="category-calzado" value="Calzado" class="category-filter">
+            <label for="category-calzado">Calzado</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="category-accesorios" value="Accesorios" class="category-filter">
+            <label for="category-accesorios">Accesorios</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO: Talla -->
+      <div class="filter-group">
+        <label class="filter-title">Talla</label>
+        <div class="filter-options">
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-xs" value="XS" class="size-filter">
+            <label for="size-xs">XS</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-s" value="S" class="size-filter">
+            <label for="size-s">S</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-m" value="M" class="size-filter">
+            <label for="size-m">M</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-l" value="L" class="size-filter">
+            <label for="size-l">L</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-xl" value="XL" class="size-filter">
+            <label for="size-xl">XL</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-36" value="36" class="size-filter">
+            <label for="size-36">36</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-37" value="37" class="size-filter">
+            <label for="size-37">37</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-38" value="38" class="size-filter">
+            <label for="size-38">38</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-39" value="39" class="size-filter">
+            <label for="size-39">39</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-40" value="40" class="size-filter">
+            <label for="size-40">40</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-41" value="41" class="size-filter">
+            <label for="size-41">41</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO: Rango de Precio -->
+      <div class="filter-group">
+        <label class="filter-title">Precio</label>
+        <div class="filter-options" style="gap: 15px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="priceMin" style="font-size: 12px; color: #666; margin-bottom: 0;">Mínimo: <span id="minPriceDisplay">$0</span></label>
+            <input type="range" id="priceMin" min="0" max="200" value="0" class="price-range-input" style="width: 100%;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="priceMax" style="font-size: 12px; color: #666; margin-bottom: 0;">Máximo: <span id="maxPriceDisplay">$200</span></label>
+            <input type="range" id="priceMax" min="0" max="200" value="200" class="price-range-input" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+
+      <button id="resetFilters" class="btn-reset">
+        <i class='bx bx-x'></i> Limpiar filtros
+      </button>
+    </aside>
+
+    <!-- RESULTADOS (LADO DERECHO) -->
+    <div class="search-results">
+      <p id="resultsCount" class="results-count">Cargando productos...</p>
+      
+      <!-- Contenedor de productos -->
+      <div class="products" id="catalogResults">
+        <!-- Los productos se cargarán aquí dinámicamente -->
+      </div>
+
+      <!-- Mensaje cuando no hay resultados -->
+      <div id="noResults" class="no-results" style="display: none;">
+        <i class='bx bx-sad'></i>
+        <p>No encontramos productos que coincidan con tu búsqueda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="end-text">
+    <p>© 2025 MK</p>
+  </footer>
+
+  <!-- MODAL PARA SELECCIONAR OPCIONES DEL PRODUCTO -->
+  <div id="optionsModal" class="modal" style="display: none;">
+    <div class="modal-overlay" onclick="closeOptionsModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeOptionsModal()">×</button>
+      <h2>Selecciona opciones del producto</h2>
+      
+      <div id="modalProductInfo" class="modal-product-info">
+        <!-- Información del producto se cargará aquí -->
+      </div>
+
+      <!-- Talla -->
+      <div id="sizeSection" class="modal-section" style="display: none;">
+        <label>Talla</label>
+        <div id="sizeOptions" class="options-grid">
+          <!-- Opciones de talla se cargarán aquí -->
+        </div>
+      </div>
+
+      <!-- Color -->
+      <div id="colorSection" class="modal-section" style="display: none;">
+        <label>Color</label>
+        <div id="colorOptions" class="options-grid">
+          <!-- Opciones de color se cargarán aquí -->
+        </div>
+      </div>
+
+      <button id="confirmBtn" class="btn-confirm" onclick="confirmAddToCart()">
+        Agregar al carrito
+      </button>
+    </div>
+  </div>
+
+  <style>
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .modal-content {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .modal-close:hover {
+      color: #333;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #222;
+      font-size: 20px;
+    }
+
+    .modal-product-info {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-product-info img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .modal-product-info-text h3 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      color: #222;
+    }
+
+    .modal-product-info-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .modal-section {
+      margin-bottom: 20px;
+    }
+
+    .modal-section label {
+      display: block;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      gap: 8px;
+    }
+
+    .option-btn {
+      padding: 10px;
+      border: 2px solid #ddd;
+      background: white;
+      color: #222;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: #34656D;
+      color: #34656D;
+    }
+
+    .option-btn.selected {
+      background: #34656D;
+      color: white;
+      border-color: #34656D;
+    }
+
+    .color-option {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 2px solid #ddd;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .color-option.selected {
+      border-color: #34656D;
+      box-shadow: 0 0 0 2px white, 0 0 0 4px #34656D;
+    }
+
+    .btn-confirm {
+      width: 100%;
+      padding: 12px;
+      background: #34656D;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    .btn-confirm:hover {
+      background: #2a4f57;
+    }
+
+    .btn-confirm:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: #d32f2f;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+
+  <script src="app.js"></script>
+  <script src="modal.js"></script>
+  <script src="featured.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>

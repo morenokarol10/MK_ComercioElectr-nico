@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factura (Simulada) — MK Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo">
+      <img src="imagenes/logo.webp" alt="MK logo">
+    </a>
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+    <div class="nav-icon">
+      <a href="search.html"><i class='bx bx-search' aria-hidden="true"></i></a>
+      <a href="login.html"><i class='bx bx-user' aria-hidden="true"></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart' aria-hidden="true"></i></a>
+      <a href="carrito.html"><i class='bx bx-cart' aria-hidden="true"></i></a>
+    </div>
+  </header>
+
+  <main class="invoice-page" style="margin-top:120px; padding:28px 10%;">
+    <section class="invoice-container">
+      <div class="invoice-header">
+        <div>
+          <h1>MK Store</h1>
+          <p class="muted">Factura simulada — uso académico</p>
+        </div>
+        <div class="invoice-meta">
+          <p><strong>Fecha:</strong> <span id="invDate">—</span></p>
+          <p><strong>N.º Factura:</strong> <span id="invNumber">—</span></p>
+        </div>
+      </div>
+
+      <div class="invoice-bill-to">
+        <div>
+          <h3>Facturar a</h3>
+          <p id="clientName">Cliente Demo</p>
+          <p id="clientEmail">demo@correo.com</p>
+        </div>
+      </div>
+
+      <div class="invoice-table-wrap">
+        <table class="invoice-table" aria-describedby="invoiceNote">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio unitario</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="invoiceItems">
+            <!-- items renderizados por JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="invoice-summary">
+        <p>Subtotal: <strong id="invSubtotal">$0.00</strong></p>
+        <p>Envío: <strong id="invShipping">$5.00</strong></p>
+        <p>IVA (15%): <strong id="invIVA">$0.00</strong></p>
+        <hr>
+        <h3>Total: <strong id="invTotal">$0.00</strong></h3>
+      </div>
+
+      <p id="invoiceNote" class="muted small">Esta factura es una simulación académica y no constituye un documento fiscal válido.</p>
+
+      <div style="margin-top:18px; display:flex; gap:12px;">
+        <a href="index.html" class="main-btn">Volver al inicio</a>
+        <button id="printInvoice" class="main-btn" style="background:#fff; color:#34656D; border:1px solid #34656D;">Imprimir</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="end-text">
+    <p>© 2025 MK — Factura simulada</p>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script src="invoice.js"></script>
+</body>
+</html>

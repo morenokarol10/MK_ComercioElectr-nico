@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar productos – MK</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- BOXICONS -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Jost:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Layout de dos columnas para búsqueda */
+    .search-section {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      margin-top: 120px;
+      padding: 40px 10%;
+    }
+
+    .search-filters {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .filter-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .filter-checkbox input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .filter-checkbox label {
+      margin: 0;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .search-bar {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #ee1c47;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #999;
+      pointer-events: none;
+    }
+
+    .search-results {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .results-count {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .no-results i {
+      font-size: 64px;
+      display: block;
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    .btn-reset {
+      width: 100%;
+      padding: 10px;
+      background: #ee1c47;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 20px;
+    }
+
+    .btn-reset:hover {
+      background: #d91a3f;
+    }
+
+    @media (max-width: 1024px) {
+      .search-section {
+        grid-template-columns: 1fr;
+        padding: 30px 6%;
+      }
+
+      .search-filters {
+        position: static;
+      }
+
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-section {
+        padding: 20px 4%;
+        gap: 20px;
+      }
+
+      .search-filters {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        background: white;
+        padding: 15px 0;
+      }
+
+      .filter-group {
+        margin-bottom: 0;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+      }
+
+      .btn-reset {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .search-section {
+        padding: 15px 4%;
+      }
+
+      .search-filters {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo"><img src="imagenes/logo.webp" alt="MK Logo"></a>
+
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+
+    <div class="nav-icon">
+      <a href="#" id="search-icon-trigger"><i class='bx bx-search'></i></a>
+      <a href="login.html"><i class='bx bx-user'></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart'></i></a>
+      <a href="carrito.html"><i class='bx bx-cart'></i></a>
+    </div>
+  </header>
+
+  <!-- SECCIÓN DE BÚSQUEDA -->
+  <section class="search-section">
+    <!-- FILTROS (LADO IZQUIERDO) -->
+    <aside class="search-filters">
+      <div class="search-bar">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Buscar..." 
+          autocomplete="off"
+        >
+        <i class='bx bx-search search-icon'></i>
+      </div>
+
+      <!-- FILTRO: Género -->
+      <div class="filter-group">
+        <label class="filter-title">Género</label>
+        <div class="filter-options">
+          <div class="filter-checkbox">
+            <input type="checkbox" id="genre-hombre" value="Hombre" class="genre-filter">
+            <label for="genre-hombre">Hombre</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="genre-mujer" value="Mujer" class="genre-filter">
+            <label for="genre-mujer">Mujer</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="genre-unisex" value="Unisex" class="genre-filter">
+            <label for="genre-unisex">Unisex</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO: Categoría -->
+      <div class="filter-group">
+        <label class="filter-title">Categoría</label>
+        <div class="filter-options">
+          <div class="filter-checkbox">
+            <input type="checkbox" id="category-ropa" value="Ropa" class="category-filter">
+            <label for="category-ropa">Ropa</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="category-calzado" value="Calzado" class="category-filter">
+            <label for="category-calzado">Calzado</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="category-accesorios" value="Accesorios" class="category-filter">
+            <label for="category-accesorios">Accesorios</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO: Talla -->
+      <div class="filter-group">
+        <label class="filter-title">Talla</label>
+        <div class="filter-options">
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-onesize" value="Única" class="size-filter">
+            <label for="size-onesize">One-Size</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-xxs" value="XXS" class="size-filter">
+            <label for="size-xxs">XXS</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-xs" value="XS" class="size-filter">
+            <label for="size-xs">XS</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-s" value="S" class="size-filter">
+            <label for="size-s">S</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-m" value="M" class="size-filter">
+            <label for="size-m">M</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-l" value="L" class="size-filter">
+            <label for="size-l">L</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="size-xl" value="XL" class="size-filter">
+            <label for="size-xl">XL</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO: Rango de Precio -->
+      <div class="filter-group">
+        <label class="filter-title">Precio</label>
+        <div class="filter-options" style="gap: 15px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="priceMin" style="font-size: 12px; color: #666; margin-bottom: 0;">Mínimo: <span id="minPriceDisplay">$0</span></label>
+            <input type="range" id="priceMin" min="0" max="200" value="0" class="price-range-input" style="width: 100%;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="priceMax" style="font-size: 12px; color: #666; margin-bottom: 0;">Máximo: <span id="maxPriceDisplay">$200</span></label>
+            <input type="range" id="priceMax" min="0" max="200" value="200" class="price-range-input" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+
+      <button id="resetFilters" class="btn-reset">
+        <i class='bx bx-x'></i> Limpiar filtros
+      </button>
+    </aside>
+
+    <!-- RESULTADOS (LADO DERECHO) -->
+    <div class="search-results">
+      <p id="resultsCount" class="results-count">Escribe para buscar productos...</p>
+      
+      <!-- Contenedor de productos -->
+      <div class="products" id="searchResults">
+        <!-- Los productos se cargarán aquí dinámicamente -->
+      </div>
+
+      <!-- Mensaje cuando no hay resultados -->
+      <div id="noResults" class="no-results" style="display: none;">
+        <i class='bx bx-sad'></i>
+        <p>No encontramos productos que coincidan con tu búsqueda.</p>
+        <p class="no-results-tip">Intenta con otros términos de búsqueda o utiliza los filtros.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="end-text">
+    <p>Copyright © 2025. All Rights Reserved. MK – Tu estilo, tu esencia.</p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="java.js"></script>
+  <script src="app.js"></script>
+  <script src="modal.js"></script>
+  <script src="nav.js"></script>
+  <script src="search.js"></script>
+
+</body>
+</html>

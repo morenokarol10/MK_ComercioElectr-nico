@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pago (Simulación) — MK Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo">
+      <img src="imagenes/logo.webp" alt="MK logo">
+    </a>
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+    <div class="nav-icon">
+      <a href="search.html"><i class='bx bx-search' aria-hidden="true"></i></a>
+      <a href="login.html"><i class='bx bx-user' aria-hidden="true"></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart' aria-hidden="true"></i></a>
+      <a href="carrito.html"><i class='bx bx-cart' aria-hidden="true"></i></a>
+    </div>
+  </header>
+
+  <main class="payment-page" style="margin-top:120px; padding:28px 10%;">
+    <section class="payment-container">
+      <h2>Pago (Simulación académica)</h2>
+      <p class="muted">No se procesan pagos reales — esta pantalla es solo una simulación.</p>
+
+      <div class="payment-grid">
+        <!-- CARRITO DE PRODUCTOS -->
+        <div id="cartProducts" class="payment-products" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:30px;">
+          <!-- Productos renderizados por JS -->
+        </div>
+
+        <form id="paymentForm" class="payment-form" aria-label="Formulario de pago">
+          <label for="p_name">Nombre del cliente</label>
+          <input id="p_name" name="name" type="text" required placeholder="Tu nombre completo">
+
+          <label for="p_email">Correo</label>
+          <input id="p_email" name="email" type="email" required placeholder="tu@correo.com">
+
+          <label for="card_number">Número de tarjeta (simulado)</label>
+          <div class="card-input-wrap">
+            <input id="card_number" name="card" type="text" inputmode="numeric" pattern="[0-9 ]{12,19}" maxlength="19" required placeholder="1234 5678 9012 3456">
+            <span id="cardBrand" class="card-brand" aria-hidden="true"></span>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+              <label for="expiry">Fecha de vencimiento</label>
+              <input id="expiry" name="expiry" type="text" placeholder="MM/AA" maxlength="5" required>
+            </div>
+            <div style="width:120px;">
+              <label for="cvv">CVV</label>
+              <input id="cvv" name="cvv" type="password" maxlength="4" placeholder="123" required>
+            </div>
+          </div>
+
+          <div id="payFeedback" role="status" aria-live="polite" class="form-feedback" hidden></div>
+
+          <button type="submit" class="main-btn">Confirmar pago (simulación)</button>
+        </form>
+
+        <aside class="payment-summary">
+          <h3>Resumen de compra</h3>
+          <p>Subtotal: <span id="paySubtotal">$0.00</span></p>
+          <p>Envío: <span id="payShipping">$5.00</span></p>
+          <p>IVA (15%): <span id="payIVA">$0.00</span></p>
+          <hr>
+          <h3>Total: <span id="payTotal">$0.00</span></h3>
+          <p class="muted small">Al confirmar, se guardará la información del cliente localmente y se generará una factura simulada.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="end-text">
+    <p>© 2025 MK — Pago simulado</p>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script src="app.js"></script>
+  <script src="modal.js"></script>
+  <script src="payment.js"></script>
+</body>
+</html>

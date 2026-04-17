@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Colección 2026 – MK Store</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- BOXICONS -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Jost:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .collection-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .collection-header h1 {
+            font-size: 48px;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+        }
+        
+        .collection-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo" data-tooltip="MK logo">
+            <img src="imagenes/logo.webp" alt="MK Logo">
+        </a>
+
+        <ul class="navmenu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="ofertas.html">Ofertas</a></li>
+            <li class="nav-item-dropdown">
+                <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+                <ul class="dropdown-menu">
+                    <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+                    <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+                    <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contacto</a></li>
+        </ul>
+
+        <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+
+        <div class="nav-icon">
+            <a href="search.html"><i class='bx bx-search'></i></a>
+            <a href="login.html"><i class='bx bx-user'></i></a>
+            <a href="favoritos.html"><i class='bx bx-heart'></i></a>
+            <a href="carrito.html"><i class='bx bx-cart'></i></a>
+        </div>
+    </header>
+
+    <!-- COLLECTION HEADER -->
+    <section class="collection-header">
+        <h1>Nueva Colección 2026</h1>
+        <p>Descubre nuestros últimos lanzamientos de moda. Prendas exclusivas diseñadas para tu estilo único.</p>
+    </section>
+
+    <!-- PRODUCTOS DE LA COLECCIÓN -->
+    <section class="trending-products" style="padding: 40px 20px;">
+        <div class="center-text">
+            <h2>Nuestros productos <span>destacados</span></h2>
+        </div>
+
+        <div id="catalogoProductos">
+            <!-- Los productos se cargarán dinámicamente -->
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="end-text">
+        <p>Copyright © 2025. MK – Tu estilo, tu esencia.</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="nueva-coleccion.js"></script>
+    <script src="nav.js"></script>
+
+</body>
+</html>

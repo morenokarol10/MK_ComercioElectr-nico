@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Favoritos – MK</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- BOXICONS -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Jost:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo"><img src="imagenes/logo.webp" alt=""></a>
+
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+
+    <div class="nav-icon">
+      <a href="search.html"><i class='bx bx-search'></i></a>
+      <a href="login.html"><i class='bx bx-user'></i></a>
+      <a href="favoritos.html" class="active"><i class='bx bx-heart'></i></a>
+      <a href="carrito.html"><i class='bx bx-cart'></i></a>
+    </div>
+  </header>
+
+  <!-- SECCIÓN DE FAVORITOS -->
+  <section class="trending-products" style="margin-top: 120px;">
+    <div class="center-text">
+      <h2>Mis <span>Favoritos</span></h2>
+    </div>
+
+    <div class="products" id="favoritos-container">
+      <p id="sin-favoritos" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666; font-size: 16px;">
+        No tienes productos favoritos aún. ¡Agrega algunos desde el inicio!
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="end-text">
+    <p>Copyright © 2025. All Rights Reserved. MK – Tu estilo, tu esencia.</p>
+  </div>
+
+  <script src="java.js"></script>
+  <script src="app.js"></script>
+  <script src="modal.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    // Cargar favoritos dinámicamente desde products.json
+    async function cargarFavoritos() {
+      try {
+        console.log('Iniciando cargarFavoritos...');
+        
+        const container = document.getElementById("favoritos-container");
+        if (!container) {
+          console.error('❌ El contenedor "favoritos-container" no existe en el HTML');
+          return;
+        }
+        console.log('✅ Contenedor encontrado');
+        
+        // Cargar todos los productos desde products.json
+        const res = await fetch('products.json');
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const allProducts = await res.json();
+        console.log('✅ Productos cargados:', allProducts.length);
+        
+        // Obtener favoritos del localStorage
+        const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        console.log('✅ Favoritos encontrados:', favorites);
+        
+        if (favorites.length === 0) {
+          container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666; font-size: 16px;">No tienes productos favoritos aún. ¡Agrega algunos desde el inicio!</p>';
+          return;
+        }
+        
+        // Limpiar el contenedor
+        container.innerHTML = "";
+        
+        // Crear un producto para cada favorito
+        favorites.forEach(productName => {
+          // Buscar el producto en allProducts
+          const product = allProducts.find(p => p.name === productName);
+          console.log(`🔍 Buscando: "${productName}", Encontrado:`, product ? '✅ Sí' : '❌ No');
+          
+          if (product) {
+            const productHTML = `
+              <div class="row">
+                <img src="${product.image}" alt="${product.name}">
+                <div class="product-text">
+                  ${product.discount ? `<h5 style="color: white; font-weight: bold; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 4px; display: inline-block;">-${product.discount}%</h5>` : '<h5>Favorito</h5>'}
+                </div>
+                <div class="trash-icon" style="color: #d32f2f; cursor: pointer; font-size: 24px;" title="Eliminar de favoritos">
+                  <i class='bx bxs-trash-alt'></i>
+                </div>
+                <div class="ratting">
+                  <i class='bx bx-star'></i>
+                  <i class='bx bx-star'></i>
+                  <i class='bx bx-star'></i>
+                  <i class='bx bx-star'></i>
+                  <i class='bx bx-star-half'></i>
+                </div>
+                <div class="price">
+                  <h4>${product.name}</h4>
+                  ${product.originalPrice ? `
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                      <p style="text-decoration: line-through; color: #999; margin: 0; font-size: 14px;">$${product.originalPrice}</p>
+                      <p style="color: #d32f2f; font-weight: bold; margin: 0;">$${product.price}</p>
+                    </div>
+                  ` : `<p>$${product.price}</p>`}
+                </div>
+                <div class="product-actions">
+                  <button class="btn-detail" onclick="goToProductDetail('${product.name}')">
+                    <i class='bx bx-show'></i> Ver detalles
+                  </button>
+                  <button class="add-to-cart" data-product="${product.name}" data-price="${product.price}">
+                    <i class='bx bx-cart'></i> Agregar
+                  </button>
+                </div>
+              </div>
+            `;
+            container.innerHTML += productHTML;
+          }
+        });
+        
+        // Agregar funcionalidad a los iconos de papelera y botones agregados
+        agregarFuncionalidadPapelera();
+        agregarFuncionalidadCarrito();
+      } catch (error) {
+        console.error('Error cargando favoritos:', error);
+        const container = document.getElementById("favoritos-container");
+        container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: red; font-size: 16px;">Error al cargar favoritos: ' + error.message + '</p>';
+      }
+    }
+
+    // Agregar funcionalidad a los iconos de papelera
+    function agregarFuncionalidadPapelera() {
+      document.querySelectorAll(".trash-icon").forEach(trashIcon => {
+        trashIcon.addEventListener("click", function(e) {
+          e.preventDefault();
+          
+          // Quitar de favoritos
+          const productName = this.closest(".row").querySelector(".price h4").textContent;
+          let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+          favorites = favorites.filter(fav => fav !== productName);
+          localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+          // Recargar la página de favoritos
+          setTimeout(() => {
+            cargarFavoritos();
+          }, 300);
+        });
+      });
+    }
+
+    // Agregar funcionalidad al carrito
+    function agregarFuncionalidadCarrito() {
+      document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", async function(e) {
+          e.preventDefault();
+          
+          const productName = this.getAttribute("data-product");
+          const productPrice = parseFloat(this.getAttribute("data-price"));
+          
+          // Cargar productos para obtener información completa
+          try {
+            const res = await fetch('products.json');
+            const allProducts = await res.json();
+            const fullProduct = allProducts.find(p => p.name === productName);
+            
+            if (fullProduct && ((fullProduct.sizes && fullProduct.sizes.length > 0) || (fullProduct.colors && fullProduct.colors.length > 0))) {
+              // Abrir modal si tiene opciones
+              if (typeof openProductModal === 'function') {
+                openProductModal(
+                  fullProduct.name,
+                  fullProduct.price,
+                  fullProduct.sizes || [],
+                  fullProduct.colors || []
+                );
+                return;
+              }
+            }
+          } catch (error) {
+            console.error('Error cargando productos:', error);
+          }
+          
+          // Si no tiene opciones, agregar directamente
+          if (typeof addToCart === 'function') {
+            addToCart({
+              name: productName,
+              price: productPrice,
+              size: null,
+              color: null
+            });
+          } else {
+            // Fallback a localStorage
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const existingProduct = cart.find(item => item.name === productName);
+            if (existingProduct) {
+              existingProduct.quantity += 1;
+            } else {
+              cart.push({
+                name: productName,
+                price: productPrice,
+                quantity: 1
+              });
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+          }
+          
+          // Feedback visual
+          const originalText = this.innerHTML;
+          this.innerHTML = '<i class="bx bx-check"></i> ¡Agregado!';
+          this.style.backgroundColor = "#34656D";
+          this.style.color = "white";
+          
+          setTimeout(() => {
+            this.innerHTML = originalText;
+            this.style.backgroundColor = "";
+            this.style.color = "";
+          }, 2000);
+        });
+      });
+    }
+
+    // Cargar favoritos cuando se abre la página
+    window.addEventListener("DOMContentLoaded", cargarFavoritos);
+    
+    // También llamar inmediatamente si el DOM ya está listo
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", cargarFavoritos);
+    } else {
+      cargarFavoritos();
+    }
+
+    // Función para ir a los detalles del producto
+    function goToProductDetail(productName) {
+      window.location.href = `product-detail.html?name=${encodeURIComponent(productName)}`;
+    }
+  </script>
+
+</body>
+</html>

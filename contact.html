@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto · Ayuda al Cliente — MK Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo">
+      <img src="imagenes/logo.webp" alt="MK logo">
+    </a>
+
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+
+    <div class="nav-icon">
+      <a href="search.html"><i class='bx bx-search' aria-hidden="true"></i></a>
+      <a href="login.html"><i class='bx bx-user' aria-hidden="true"></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart' aria-hidden="true"></i></a>
+      <a href="carrito.html"><i class='bx bx-cart' aria-hidden="true"></i></a>
+    </div>
+  </header>
+
+  <main class="contact-section" id="main">
+    <div class="center-text" style="margin-top:120px;">
+      <h1>Contacto y Ayuda al Cliente</h1>
+      <p class="lead">¿Tienes dudas? Aquí encontrarás respuestas rápidas y formas sencillas de contactarnos.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- FAQ (Acordeón) -->
+      <section class="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Preguntas Frecuentes</h2>
+
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="faq1" id="faq1-btn">
+              <span class="acc-icon"><i class='bx bx-question-mark'></i></span>
+              ¿Cómo puedo hacer un pedido?
+            </button>
+            <div id="faq1" class="accordion-panel" role="region" aria-labelledby="faq1-btn">
+              <p>Selecciona los productos, elige tallas y colores si aplica, añade al carrito y sigue el proceso de compra. Puedes pagar con tarjeta o métodos soportados.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="faq2" id="faq2-btn">
+              <span class="acc-icon"><i class='bx bx-truck'></i></span>
+              ¿Cuánto tarda el envío?
+            </button>
+            <div id="faq2" class="accordion-panel" role="region" aria-labelledby="faq2-btn">
+              <p>Los envíos estándar suelen tardar entre 3 y 7 días hábiles dependiendo de tu ubicación. Ofrecemos opciones exprés en el checkout.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="faq3" id="faq3-btn">
+              <span class="acc-icon"><i class='bx bx-undo'></i></span>
+              ¿Cuál es la política de devoluciones?
+            </button>
+            <div id="faq3" class="accordion-panel" role="region" aria-labelledby="faq3-btn">
+              <p>Aceptamos devoluciones en un plazo de 30 días desde la entrega. El producto debe estar en su estado original. Revisa la sección Devoluciones para más detalles.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="faq4" id="faq4-btn">
+              <span class="acc-icon"><i class='bx bx-card'></i></span>
+              ¿Qué métodos de pago aceptan?
+            </button>
+            <div id="faq4" class="accordion-panel" role="region" aria-labelledby="faq4-btn">
+              <p>Aceptamos tarjetas de crédito y débito, pagos locales y otros métodos digitales. Consulta el paso de pago para ver los disponibles según tu país.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact info + Form -->
+      <aside class="contact-aside" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Datos de contacto</h2>
+
+        <ul class="contact-list">
+          <li><i class='bx bx-envelope'></i> Email: <a href="mailto:soporte@mkstore.com">soporte@mkstore.com</a></li>
+          <li><i class='bx bx-phone'></i> Teléfono: <a href="tel:+34123456789">+34 123 456 789</a></li>
+          <li><i class='bx bxl-whatsapp'></i> WhatsApp: <a href="https://wa.me/34123456789" target="_blank" rel="noopener">+34 123 456 789</a></li>
+          <li><i class='bx bx-time'></i> Horario: Lun–Vie 09:00–18:00</li>
+        </ul>
+
+        <h3>Envíanos un mensaje</h3>
+        <form id="contactForm" class="contact-form" novalidate>
+          <label for="name">Nombre</label>
+          <input id="name" name="name" type="text" required aria-required="true" placeholder="Tu nombre">
+
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" required aria-required="true" placeholder="tu@ejemplo.com">
+
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="5" required aria-required="true" placeholder="Cuéntanos tu consulta..."></textarea>
+
+          <button type="submit" class="main-btn">Enviar mensaje</button>
+
+          <div id="formFeedback" role="status" aria-live="polite" class="form-feedback" hidden></div>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="end-text">
+    <p>© 2025 MK — Soporte al cliente</p>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script src="contact.js"></script>
+</body>
+</html>

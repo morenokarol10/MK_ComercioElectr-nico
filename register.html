@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro – MK</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- BOXICONS -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Jost:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" data-tooltip="MK logo"><img src="imagenes/logo.webp" alt=""></a>
+
+    <ul class="navmenu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li class="nav-item-dropdown">
+        <a href="featured.html" class="nav-link-catalog">Catálogo</a>
+        <ul class="dropdown-menu">
+          <li><a href="featured.html?genre=Hombre">Hombre</a></li>
+          <li><a href="featured.html?genre=Mujer">Mujer</a></li>
+          <li><a href="featured.html?genre=Unisex">Unisex</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+
+    <i id="menu-icon" class='bx bx-menu' role="button" aria-expanded="false" tabindex="0"></i>
+
+    <div class="nav-icon">
+      <a href="search.html"><i class='bx bx-search'></i></a>
+      <a href="login.html" class="active"><i class='bx bx-user'></i></a>
+      <a href="favoritos.html"><i class='bx bx-heart'></i></a>
+      <a href="carrito.html"><i class='bx bx-cart'></i></a>
+    </div>
+  </header>
+
+  <!-- SECCIÓN DE REGISTRO -->
+  <section class="auth-section" style="margin-top: 140px;">
+    <div class="auth-container">
+      <h2>Registro de usuario</h2>
+      <form id="register-form">
+        <label for="reg-name">Nombre completo</label>
+        <input id="reg-name" type="text" placeholder="Tu nombre" required>
+
+        <label for="reg-email">Email</label>
+        <input id="reg-email" type="email" placeholder="tu@email.com" required>
+
+        <label for="reg-password">Contraseña</label>
+        <input id="reg-password" type="password" placeholder="Mínimo 8 caracteres, incluye letra mayúscula y número" minlength="8" required>
+
+        <label for="reg-password-confirm">Confirmar contraseña</label>
+        <input id="reg-password-confirm" type="password" placeholder="Repite la contraseña" minlength="8" required>
+
+        <div id="regFeedback" role="status" aria-live="polite" class="form-feedback" hidden></div>
+
+        <button type="submit" class="main-btn">Registrar</button>
+
+        <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="end-text">
+    <p>Copyright © 2025. All Rights Reserved. MK – Tu estilo, tu esencia.</p>
+  </div>
+
+  <script src="java.js"></script>
+  <script src="nav.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>
